@@ -2,6 +2,8 @@
 
 $(document).on("ready", function() {
 
+  $('.row').animate({'backgroundColor':'#8cd5f7'}, 2000);
+
   setInterval(movePlane, 20);
   var keys = [];
 
@@ -29,16 +31,16 @@ $(document).on("ready", function() {
       for (var direction in keys) {
           if (!keys.hasOwnProperty(direction)) continue;
           if (direction == 37) {
-              $("#plane").animate({left: "-=5"}, 0);
+              $("#plane").animate({left: "-=10"}, 0, checkCollisions);
           }
           if (direction == 38) {
-              $("#plane").animate({top: "-=5"}, 0);
+              $("#plane").animate({top: "-=10"}, 0, checkCollisions);
           }
           if (direction == 39) {
-              $("#plane").animate({left: "+=5"}, 0);
+              $("#plane").animate({left: "+=10"}, 0, checkCollisions);
           }
           if (direction == 40) {
-              $("#plane").animate({top: "+=5"}, 0);
+              $("#plane").animate({top: "+=10"}, 0, checkCollisions);
           }
         }
       }
@@ -48,20 +50,52 @@ $(document).on("ready", function() {
           if (!keys2.hasOwnProperty(direction)) continue;
 
           if (direction == 65) {
-              $("#plane2").animate({left: "-=5"}, 0);
+              $("#plane2").animate({left: "-=10"}, 0, checkCollisions);
           }
           if (direction == 87) {
-              $("#plane2").animate({top: "-=5"}, 0);
+              $("#plane2").animate({top: "-=10"}, 0, checkCollisions);
           }
           if (direction == 68) {
-              $("#plane2").animate({left: "+=5"}, 0);
+              $("#plane2").animate({left: "+=10"}, 0, checkCollisions);
           }
           if (direction == 83) {
-              $("#plane2").animate({top: "+=5"}, 0);
+              $("#plane2").animate({top: "+=10"}, 0, checkCollisions);
           }
       }
   }
 });
+
+function getPositions(box) {
+  var $box = $(box);
+  var pos = $box.position();
+  var width = $box.width();
+  var height = $box.height();
+  return [ [ pos.left, pos.left + width ], [ pos.top, pos.top + height ] ];
+}
+
+function comparePositions(p1, p2) {
+  var x1 = p1[0] < p2[0] ? p1 : p2;
+  var x2 = p1[0] < p2[0] ? p2 : p1;
+  return x1[1] > x2[0] || x1[0] === x2[0] ? true : false;
+}
+
+function checkCollisions(){
+  var box = $(".finish-line")[0];
+  var pos = getPositions(box);
+
+  var pos2 = getPositions(this);
+  var horizontalMatch = comparePositions(pos[0], pos2[0]);
+  var verticalMatch = comparePositions(pos[1], pos2[1]);
+  var match = horizontalMatch && verticalMatch;
+  if (match) { alert("You Won!"); }
+}
+
+/**
+ * Define an object to hold all our images for the game so images
+ * are only ever created once. This type of object is known as a
+ * singleton.
+ */
+
   // $(window).bind('keydown', function(event1) {
   //     var player1 = $("#player1");
   //     var left = 37;

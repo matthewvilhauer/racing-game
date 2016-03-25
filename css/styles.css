@@ -16,3 +16,11 @@
   top:50%;
   left:5%;
 }
+
+.finish-line {
+  position:absolute;
+  width: 50px;
+  height: 100%;
+  left: 95%;
+  background-color: red;
+}
