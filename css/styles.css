@@ -3,7 +3,7 @@
   height: 50px;
   position:absolute;
   top:40%;
-  left:40%;
+  left:5%;
   transform:          rotate(90deg);
   -ms-transform:      rotate(90deg);
   -moz-transform:     rotate(90deg);
@@ -11,26 +11,8 @@
   -o-transform:       rotate(90deg);
 }
 
-#player1 {
-  position: absolute;
-  background-color: #abc;
-  left: 50px;
-  top: 175px;
-  width: 50px;
-  height: 50px;
-  margin: 5px;
-
-  -webkit-transition: left .02s;
-     -moz-transition: left .02s;
-       -o-transition: left .02s;
-          transition: left .02s;
-}
-#player2 {
-  position: absolute;
-  background-color: #00FF00;
-  left: 50px;
-  top: 625px;
-  width: 50px;
-  height: 50px;
-  margin: 5px;
+#plane2 {
+  position:absolute;
+  top:50%;
+  left:5%;
 }

@@ -13,6 +13,17 @@ $(document).on("ready", function() {
       delete keys[e.keyCode];
   });
 
+  setInterval(movePlane2, 20);
+  var keys2 = [];
+
+  $(document).keydown(function(e) {
+      keys2[e.keyCode] = true;
+  });
+
+  $(document).keyup(function(e) {
+      delete keys2[e.keyCode];
+  });
+
 
   function movePlane() {
       for (var direction in keys) {
@@ -29,9 +40,28 @@ $(document).on("ready", function() {
           if (direction == 40) {
               $("#plane").animate({top: "+=5"}, 0);
           }
+        }
+      }
+
+  function movePlane2() {
+      for (var direction in keys2) {
+          if (!keys2.hasOwnProperty(direction)) continue;
+
+          if (direction == 65) {
+              $("#plane2").animate({left: "-=5"}, 0);
+          }
+          if (direction == 87) {
+              $("#plane2").animate({top: "-=5"}, 0);
+          }
+          if (direction == 68) {
+              $("#plane2").animate({left: "+=5"}, 0);
+          }
+          if (direction == 83) {
+              $("#plane2").animate({top: "+=5"}, 0);
+          }
       }
   }
-
+});
   // $(window).bind('keydown', function(event1) {
   //     var player1 = $("#player1");
   //     var left = 37;
@@ -53,27 +83,27 @@ $(document).on("ready", function() {
   //     }
   // });
   //
-  // $(window).bind('keydown', function(event2) {
-  //   var player2 = $("#player2");
-  //   var letterA = 65;
-  //   var letterS = 83;
-  //   var letterD = 68;
-  //   var letterW = 87;
-  //
-  //   if (event2.keyCode == letterA) {
-  //       player2.animate({left: "-=50px"},5,'linear', updatePlayerPosition());
-  //   }
-  //   if (event2.keyCode == letterW) {
-  //       player2.animate({top: "-=50px"},5,'linear', updatePlayerPosition());
-  //   }
-  //   if (event2.keyCode == letterD) {
-  //       player2.animate({left:"+=50px"},5,'linear', updatePlayerPosition());
-  //   }
-  //   if (event2.keyCode == letterS) {
-  //       player2.animate({top: "+=50px"},5,'linear', updatePlayerPosition());
-  //   }
-  // });
-});
+//   $(window).bind('keydown', function(event2) {
+//     var player2 = $("#player2");
+//     var letterA = 65;
+//     var letterS = 83;
+//     var letterD = 68;
+//     var letterW = 87;
+//
+//     if (event2.keyCode == letterA) {
+//         player2.animate({left: "-=50px"},5,'linear', updatePlayerPosition());
+//     }
+//     if (event2.keyCode == letterW) {
+//         player2.animate({top: "-=50px"},5,'linear', updatePlayerPosition());
+//     }
+//     if (event2.keyCode == letterD) {
+//         player2.animate({left:"+=50px"},5,'linear', updatePlayerPosition());
+//     }
+//     if (event2.keyCode == letterS) {
+//         player2.animate({top: "+=50px"},5,'linear', updatePlayerPosition());
+//     }
+//   });
+// });
 
 // var updatePlayerPosition = function() {
 //   console.log("Updating position");
