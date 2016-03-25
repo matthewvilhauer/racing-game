@@ -1,17 +1,36 @@
 
+#plane {
+  height: 50px;
+  position:absolute;
+  top:40%;
+  left:40%;
+  transform:          rotate(90deg);
+  -ms-transform:      rotate(90deg);
+  -moz-transform:     rotate(90deg);
+  -webkit-transform:  rotate(90deg);
+  -o-transform:       rotate(90deg);
+}
+
 #player1 {
   position: absolute;
   background-color: #abc;
-  left: 250px;
-  width: 90px;
-  height: 90px;
+  left: 50px;
+  top: 175px;
+  width: 50px;
+  height: 50px;
   margin: 5px;
+
+  -webkit-transition: left .02s;
+     -moz-transition: left .02s;
+       -o-transition: left .02s;
+          transition: left .02s;
 }
 #player2 {
   position: absolute;
   background-color: #00FF00;
-  left: 350px;
-  width: 90px;
-  height: 90px;
+  left: 50px;
+  top: 625px;
+  width: 50px;
+  height: 50px;
   margin: 5px;
 }
