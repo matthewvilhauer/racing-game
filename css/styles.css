@@ -1,0 +1,17 @@
+
+#player1 {
+  position: absolute;
+  background-color: #abc;
+  left: 250px;
+  width: 90px;
+  height: 90px;
+  margin: 5px;
+}
+#player2 {
+  position: absolute;
+  background-color: #00FF00;
+  left: 350px;
+  width: 90px;
+  height: 90px;
+  margin: 5px;
+}
