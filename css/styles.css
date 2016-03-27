@@ -1,6 +1,5 @@
 
-.container {
-  background-image:url('../images/classic-nebula-space-pattern.jpg');
+.background {
   background-repeat:no-repeat;
   background-size:contain;
   background-position:center;
