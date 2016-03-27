@@ -1,10 +1,22 @@
 // define globals
+$plane = $("#plane");
+$helicopter = $("#helicopter");
+$plane.name = "Player 1";
+$helicopter.name = "Player 2";
+
 
 $(document).on("ready", function() {
 
-  $('.row').animate({'backgroundColor':'#8cd5f7'}, 2000);
+  function newGame() {
+    $plane.addClass('#plane-init');
+    $helicopter.addClass('#helicopter-init');
+  }
 
-  setInterval(movePlane, 20);
+  $('#reset').on('click', function() {
+    reset();
+  });
+
+  setInterval(movePlane, 30);
   var keys = [];
 
   $(document).keydown(function(e) {
@@ -15,7 +27,7 @@ $(document).on("ready", function() {
       delete keys[e.keyCode];
   });
 
-  setInterval(movePlane2, 20);
+  setInterval(moveHelicopter, 30);
   var keys2 = [];
 
   $(document).keydown(function(e) {
@@ -26,119 +38,83 @@ $(document).on("ready", function() {
       delete keys2[e.keyCode];
   });
 
-
   function movePlane() {
       for (var direction in keys) {
           if (!keys.hasOwnProperty(direction)) continue;
           if (direction == 37) {
-              $("#plane").animate({left: "-=10"}, 0, checkCollisions);
+              $("#plane").animate({left: "-=10"}, 0, checkForFinishLine);
           }
           if (direction == 38) {
-              $("#plane").animate({top: "-=10"}, 0, checkCollisions);
+              $("#plane").animate({top: "-=10"}, 0, checkForFinishLine);
           }
           if (direction == 39) {
-              $("#plane").animate({left: "+=10"}, 0, checkCollisions);
+              $("#plane").animate({left: "+=10"}, 0, checkForFinishLine);
           }
           if (direction == 40) {
-              $("#plane").animate({top: "+=10"}, 0, checkCollisions);
+              $("#plane").animate({top: "+=10"}, 0, checkForFinishLine);
           }
         }
       }
 
-  function movePlane2() {
+  function moveHelicopter() {
       for (var direction in keys2) {
           if (!keys2.hasOwnProperty(direction)) continue;
 
           if (direction == 65) {
-              $("#plane2").animate({left: "-=10"}, 0, checkCollisions);
+              $("#helicopter").animate({left: "-=10"}, 0, checkForFinishLine);
           }
           if (direction == 87) {
-              $("#plane2").animate({top: "-=10"}, 0, checkCollisions);
+              $("#helicopter").animate({top: "-=10"}, 0, checkForFinishLine);
           }
           if (direction == 68) {
-              $("#plane2").animate({left: "+=10"}, 0, checkCollisions);
+              $("#helicopter").animate({left: "+=10"}, 0, checkForFinishLine);
           }
           if (direction == 83) {
-              $("#plane2").animate({top: "+=10"}, 0, checkCollisions);
+              $("#helicopter").animate({top: "+=10"}, 0, checkForFinishLine);
           }
       }
   }
+
+  function getPositions(box) {
+    var $box = $(box);
+    var pos = $box.position();
+    var width = $box.width();
+    var height = $box.height();
+    return [ [ pos.left, pos.left + width ], [ pos.top, pos.top + height ] ];
+  }
+
+  //
+  function comparePositions(p1, p2) {
+    var x1 = p1[0] < p2[0] ? p1 : p2;
+    var x2 = p1[0] < p2[0] ? p2 : p1;
+    return x1[1] > x2[0] || x1[0] === x2[0] ? true : false;
+  }
+
+  //Checks to see if objects are touching one another
+  function checkForFinishLine(){
+    var finish = $(".finish-line")[0];
+    var finishPosistion = getPositions(finish);
+    var racerPosition = getPositions(this);
+    var horizontalMatch = comparePositions(finishPosistion[0], racerPosition[0]);
+    var verticalMatch = comparePositions(finishPosistion[1], racerPosition[1]);
+    var match = horizontalMatch && verticalMatch;
+    if (match) { gameWon(); }
+  }
+
+  function reset() {
+    $plane.removeClass('#plane-init');
+    $helicopter.removeClass('#helicopter-init');
+    window.location.reload();
+    // reset the positions
+    $plane.addClass('#plane-init');
+    $helicopter.addClass('#helicopter-init');
+  }
+
+  function gameWon() {
+    reset();
+    alert(this.name+" Won!");
+  }
+
+  newGame();
+
 });
-
-function getPositions(box) {
-  var $box = $(box);
-  var pos = $box.position();
-  var width = $box.width();
-  var height = $box.height();
-  return [ [ pos.left, pos.left + width ], [ pos.top, pos.top + height ] ];
-}
-
-function comparePositions(p1, p2) {
-  var x1 = p1[0] < p2[0] ? p1 : p2;
-  var x2 = p1[0] < p2[0] ? p2 : p1;
-  return x1[1] > x2[0] || x1[0] === x2[0] ? true : false;
-}
-
-function checkCollisions(){
-  var box = $(".finish-line")[0];
-  var pos = getPositions(box);
-
-  var pos2 = getPositions(this);
-  var horizontalMatch = comparePositions(pos[0], pos2[0]);
-  var verticalMatch = comparePositions(pos[1], pos2[1]);
-  var match = horizontalMatch && verticalMatch;
-  if (match) { alert("You Won!"); }
-}
-
-/**
- * Define an object to hold all our images for the game so images
- * are only ever created once. This type of object is known as a
- * singleton.
- */
-
-  // $(window).bind('keydown', function(event1) {
-  //     var player1 = $("#player1");
-  //     var left = 37;
-  //     var up = 38;
-  //     var right = 39;
-  //     var down = 40;
-  //
-  //     if (event1.keyCode == left) {
-  //         player1.animate({left: "-=50px"},5,'linear', updatePlayerPosition());
-  //     }
-  //     if (event1.keyCode == up) {
-  //         player1.animate({top: "-=50px"},5,'linear', updatePlayerPosition());
-  //     }
-  //     if (event1.keyCode == right) {
-  //         player1.animate({left:"+=50px"},5,'linear', updatePlayerPosition());
-  //     }
-  //     if (event1.keyCode == down) {
-  //         player1.animate({top: "+=50px"},5,'linear', updatePlayerPosition());
-  //     }
-  // });
-  //
-//   $(window).bind('keydown', function(event2) {
-//     var player2 = $("#player2");
-//     var letterA = 65;
-//     var letterS = 83;
-//     var letterD = 68;
-//     var letterW = 87;
-//
-//     if (event2.keyCode == letterA) {
-//         player2.animate({left: "-=50px"},5,'linear', updatePlayerPosition());
-//     }
-//     if (event2.keyCode == letterW) {
-//         player2.animate({top: "-=50px"},5,'linear', updatePlayerPosition());
-//     }
-//     if (event2.keyCode == letterD) {
-//         player2.animate({left:"+=50px"},5,'linear', updatePlayerPosition());
-//     }
-//     if (event2.keyCode == letterS) {
-//         player2.animate({top: "+=50px"},5,'linear', updatePlayerPosition());
-//     }
-//   });
-// });
-
-// var updatePlayerPosition = function() {
-//   console.log("Updating position");
-// };

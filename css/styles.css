@@ -1,9 +1,16 @@
 
+.container {
+  background-image:url('../images/classic-nebula-space-pattern.jpg');
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:center;
+}
+
 #plane {
   height: 50px;
   position:absolute;
-  top:40%;
-  left:5%;
+  top:5%;
+  left:2%;
   transform:          rotate(90deg);
   -ms-transform:      rotate(90deg);
   -moz-transform:     rotate(90deg);
@@ -11,16 +18,32 @@
   -o-transform:       rotate(90deg);
 }
 
-#plane2 {
+#helicopter {
   position:absolute;
-  top:50%;
-  left:5%;
+  height: 78px;
+  top:85%;
+  left:1%;
+}
+
+#plane-init {
+  top:5%;
+  left:2%;
+}
+
+#helicopter-init {
+  top:85%;
+  left:1%;
 }
 
 .finish-line {
   position:absolute;
-  width: 50px;
-  height: 100%;
-  left: 95%;
-  background-color: red;
+  height: 20%;
+  left: 90%;
+  top: 40%;
+}
+
+#reset {
+  position:absolute;
+  left: 94%;
+  top: 2%;
 }
