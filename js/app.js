@@ -3,77 +3,74 @@ var $plane = $("#plane");
 var $helicopter = $("#helicopter");
 $plane.name = "Player 1";
 $helicopter.name = "Player 2";
-
+planeScore = 0;
+helicopterScore = 0;
 
 $(document).on("ready", function() {
 
   function newGame() {
     $plane.addClass('#plane-init');
     $helicopter.addClass('#helicopter-init');
+    $("#plane-score").text("Plane: "+planeScore);
+    $("#helicopter-score").text("Helicopter: "+helicopterScore);
   }
 
   $('#reset').on('click', function() {
     reset();
   });
 
-  setInterval(movePlane, 20);
-  var keys = [];
+  // player key selection map
+  var keys = {};
 
+  // key event handlers
   $(document).keydown(function(e) {
       keys[e.keyCode] = true;
   });
-
   $(document).keyup(function(e) {
       delete keys[e.keyCode];
   });
-
-  setInterval(moveHelicopter, 20);
-  var keys2 = [];
-
-  $(document).keydown(function(e) {
-      keys2[e.keyCode] = true;
-  });
-
-  $(document).keyup(function(e) {
-      delete keys2[e.keyCode];
-  });
-
+  // for smooth animation using setInterval
+  setInterval(movePlane, 30);
+  setInterval(moveHelicopter, 30);
 
   function movePlane() {
-    for (var direction in keys) {
-      if (!keys.hasOwnProperty(direction)) continue;
-      if (direction == 37) {
-          $("#plane").animate({left: "-=10"}, 0, checkForFinishLine);
-      }
-      if (direction == 38) {
-          $("#plane").animate({top: "-=10"}, 0, checkForFinishLine);
-      }
-      if (direction == 39) {
-          $("#plane").animate({left: "+=10"}, 0, checkForFinishLine);
-      }
-      if (direction == 40) {
-          $("#plane").animate({top: "+=10"}, 0, checkForFinishLine);
-      }
-    }
+      movePlayer('#plane', keys);
   }
-
   function moveHelicopter() {
-    for (var direction in keys2) {
-      if (!keys2.hasOwnProperty(direction)) continue;
+      movePlayer('#helicopter', keys);
+  }
+  function movePlayer() {
+      for (var direction in keys) {
+          if (!keys.hasOwnProperty(direction)) continue;
 
-      if (direction == 65) {
-          $("#plane2").animate({left: "-=10"}, 0, checkForFinishLine);
+          // plane
+          if (direction == 37) {
+              $('#plane').animate({left: "-=5"}, 0, checkForFinishLine);
+          }
+          if (direction == 38) {
+              $('#plane').animate({top: "-=5"}, 0, checkForFinishLine);
+          }
+          if (direction == 39) {
+              $('#plane').animate({left: "+=5"}, 0, checkForFinishLine);
+          }
+          if (direction == 40) {
+              $('#plane').animate({top: "+=5"}, 0, checkForFinishLine);
+          }
+
+          // helicopter
+          if (direction == 65) {
+              $("#helicopter").animate({left: "-=5"}, 0, checkForFinishLine);
+          }
+          if (direction == 87) {
+              $("#helicopter").animate({top: "-=5"}, 0, checkForFinishLine);
+          }
+          if (direction == 68) {
+              $("#helicopter").animate({left: "+=5"}, 0, checkForFinishLine);
+          }
+          if (direction == 83) {
+              $("#helicopter").animate({top: "+=5"}, 0, checkForFinishLine);
+          }
       }
-      if (direction == 87) {
-          $("#plane2").animate({top: "-=10"}, 0, checkForFinishLine);
-      }
-      if (direction == 68) {
-          $("#plane2").animate({left: "+=10"}, 0, checkForFinishLine);
-      }
-      if (direction == 83) {
-          $("#plane2").animate({top: "+=10"}, 0, checkForFinishLine);
-      }
-    }
   }
 
   newGame();
@@ -116,17 +113,38 @@ function checkForFinishLine(){
 function reset() {
   $plane.removeClass('#plane-init');
   $helicopter.removeClass('#helicopter-init');
-  window.location.reload();
   // reset the positions
   $plane.addClass('#plane-init');
   $helicopter.addClass('#helicopter-init');
+  window.location.reload();
 }
 
 function planeWon() {
-  reset();
-  alert("Plane Won!");
+  bootbox.confirm("Plane Won!", function() {
+    reset();
+    planeScore += 1;
+});
+
 }
 function helicopterWon() {
-  reset();
-  alert("Helicopter Won!");
+  bootbox.confirm("Helicopter Won!", function() {
+    reset();
+    helicopterScore += 1;
+});
 }
+
+//modal event handlers
+$("#myModal").on("show", function() {    // wire up the OK button to dismiss the modal when shown
+    $("#myModal .btn").on("click", function(e) {
+        // just as an example...
+        $("#myModal").modal('hide');
+        reset();// dismiss the dialog
+    });
+});
+$("#myModal").on("hide", function() {    // remove the event listeners when the dialog is dismissed
+    $("#myModal a.btn").off("click");
+});
+
+$("#myModal").on("hidden", function() {  // remove the actual elements from the DOM when fully hidden
+    $("#myModal").remove();
+});
