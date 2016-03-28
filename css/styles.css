@@ -2,8 +2,8 @@
 #plane {
   height: 50px;
   position:absolute;
-  top:40%;
-  left:5%;
+  top:5%;
+  left:2%;
   transform:          rotate(90deg);
   -ms-transform:      rotate(90deg);
   -moz-transform:     rotate(90deg);
@@ -11,16 +11,67 @@
   -o-transform:       rotate(90deg);
 }
 
-#plane2 {
+#helicopter {
   position:absolute;
-  top:50%;
-  left:5%;
+  height: 78px;
+  top:85%;
+  left:1%;
+}
+
+#plane-init {
+  top:5%;
+  left:2%;
+}
+
+#helicopter-init {
+  top:85%;
+  left:1%;
 }
 
 .finish-line {
   position:absolute;
-  width: 50px;
-  height: 100%;
-  left: 95%;
-  background-color: red;
+  height: 20%;
+  left: 90%;
+  top: 40%;
+}
+
+#reset-score {
+  position:absolute;
+  left: 94%;
+  top: 2%;
+}
+
+#plane-score {
+  position:absolute;
+  left: 77%;
+  top: 2%;
+}
+#helicopter-score {
+  position:absolute;
+  left: 84%;
+  top: 2%;
+}
+
+#myModal {
+    position:absolute;
+    background:url("http://giphy.com/gifs/loop-light-PQlTBMGU2HXwc") 0 0 repeat;
+
+    border-radius:14px;
+    padding:8px;
+}
+
+#content {
+    border-radius:8px;
+    background:url("http://giphy.com/gifs/loop-light-PQlTBMGU2HXwc") 0 0 repeat;
+    padding:20px;
+}
+#close {
+    position:absolute;
+    background:url("http://giphy.com/gifs/loop-light-PQlTBMGU2HXwc") 0 0 no-repeat;
+    width:24px;
+    height:27px;
+    display:block;
+    text-indent:-9999px;
+    top:-7px;
+    right:-7px;
 }
