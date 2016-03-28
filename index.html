@@ -23,31 +23,24 @@
 				<img id="plane" src='images/plane.png'/>
 				<img id="helicopter" src='images/helicopter.png'/>
 				<img class="finish-line" src='images/Blue_Portal.png'/>
-				<div id="win-alert"></div>
-				<div id="plane-score">Plane: </div><div id="helicopter-score">Helicopter: </div>
-				<button id="reset">Reset</button>
-
+				<div id="plane-score"></div><div id="helicopter-score"></div>
+				<button id="reset-score">Reset</button>
 			</div>
 		</div>
 
 		<!-- set up the modal to start hidden and fade in and out -->
-<div id="myModal" class="modal hide fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <!-- dialog body -->
-      <div class="modal-body">
-        <button type="button" class="btn btn-primary" id="reset">New Game</button>
-      </div>
-      <!-- dialog buttons -->
-      <div class="modal-footer"><button type="button" class="btn btn-primary" id="reset">OK</button></div>
-    </div>
-  </div>
-</div>
-
-<!-- sometime later, probably inside your on load event callback -->
-<script>
-
-</script>
+		<div id="myModal" class="modal hide fade">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <!-- dialog body -->
+		      <div class="modal-body">
+		        <button type="button" class="btn btn-primary" id="reset">New Game</button>
+		      </div>
+		      <!-- dialog buttons -->
+		      <div class="modal-footer"><button type="button" class="btn btn-primary" id="reset">OK</button></div>
+		    </div>
+		  </div>
+		</div>
 
 		<!-- Bootstrap CDN -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>

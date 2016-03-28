@@ -3,19 +3,30 @@ var $plane = $("#plane");
 var $helicopter = $("#helicopter");
 $plane.name = "Player 1";
 $helicopter.name = "Player 2";
-planeScore = 0;
-helicopterScore = 0;
+planeScore = $("#planeScore").value;
+helicopterScore = $("#helicopterScore").value;
 
 $(document).on("ready", function() {
+
+  planeScore = 0;
+  helicopterScore = 0;
 
   function newGame() {
     $plane.addClass('#plane-init');
     $helicopter.addClass('#helicopter-init');
+    showScoreboard();
     $("#plane-score").text("Plane: "+planeScore);
     $("#helicopter-score").text("Helicopter: "+helicopterScore);
   }
 
   $('#reset').on('click', function() {
+    reset();
+  });
+
+  $('#reset-score').on('click', function() {
+    planeScore = 0;
+    helicopterScore = 0;
+    populateScoreboard();
     reset();
   });
 
@@ -110,27 +121,29 @@ function checkForFinishLine(){
   else if (helicopterMatch) { helicopterWon(); }
 }
 
+function planeWon() {
+  bootbox.confirm("Plane Wins!", function() {
+    planeScore++;
+    populateScoreboard();
+    reset();
+});
+}
+
+function helicopterWon() {
+  bootbox.confirm("Helicopter Wins!", function() {
+    helicopterScore++;
+    populateScoreboard();
+    reset();
+});
+}
+
 function reset() {
   $plane.removeClass('#plane-init');
   $helicopter.removeClass('#helicopter-init');
   // reset the positions
   $plane.addClass('#plane-init');
   $helicopter.addClass('#helicopter-init');
-  window.location.reload();
-}
-
-function planeWon() {
-  bootbox.confirm("Plane Won!", function() {
-    reset();
-    planeScore += 1;
-});
-
-}
-function helicopterWon() {
-  bootbox.confirm("Helicopter Won!", function() {
-    reset();
-    helicopterScore += 1;
-});
+  location.reload();
 }
 
 //modal event handlers
@@ -148,3 +161,12 @@ $("#myModal").on("hide", function() {    // remove the event listeners when the 
 $("#myModal").on("hidden", function() {  // remove the actual elements from the DOM when fully hidden
     $("#myModal").remove();
 });
+
+function populateScoreboard() {
+  localStorage.setItem('planeScore', planeScore);
+  localStorage.setItem('helicopterScore', helicopterScore);
+}
+function showScoreboard() {
+  planeScore = localStorage.getItem('planeScore');
+  helicopterScore = localStorage.getItem('helicopterScore');
+}

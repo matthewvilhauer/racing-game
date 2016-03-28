@@ -35,7 +35,7 @@
   top: 40%;
 }
 
-#reset {
+#reset-score {
   position:absolute;
   left: 94%;
   top: 2%;
@@ -43,7 +43,7 @@
 
 #plane-score {
   position:absolute;
-  left: 80%;
+  left: 77%;
   top: 2%;
 }
 #helicopter-score {
@@ -52,32 +52,22 @@
   top: 2%;
 }
 
-#overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #000;
-    opacity: 0.5;
-    filter: alpha(opacity=50);
-}
-#modal {
+#myModal {
     position:absolute;
-    background:url(tint20.png) 0 0 repeat;
-    background:rgba(0,0,0,0.2);
+    background:url("http://giphy.com/gifs/loop-light-PQlTBMGU2HXwc") 0 0 repeat;
+
     border-radius:14px;
     padding:8px;
 }
 
 #content {
     border-radius:8px;
-    background:#fff;
+    background:url("http://giphy.com/gifs/loop-light-PQlTBMGU2HXwc") 0 0 repeat;
     padding:20px;
 }
 #close {
     position:absolute;
-    background:url(close.png) 0 0 no-repeat;
+    background:url("http://giphy.com/gifs/loop-light-PQlTBMGU2HXwc") 0 0 no-repeat;
     width:24px;
     height:27px;
     display:block;
