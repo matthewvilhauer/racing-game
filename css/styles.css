@@ -28,7 +28,7 @@
   left:1%;
 }
 
-.finish-line {
+#finish-line {
   position:absolute;
   height: 20%;
   left: 90%;
@@ -54,24 +54,7 @@
 
 #myModal {
     position:absolute;
-    background:url("http://giphy.com/gifs/loop-light-PQlTBMGU2HXwc") 0 0 repeat;
-
+    background-image:url("../images/space-2.png") 0 0 repeat;
     border-radius:14px;
     padding:8px;
-}
-
-#content {
-    border-radius:8px;
-    background:url("http://giphy.com/gifs/loop-light-PQlTBMGU2HXwc") 0 0 repeat;
-    padding:20px;
-}
-#close {
-    position:absolute;
-    background:url("http://giphy.com/gifs/loop-light-PQlTBMGU2HXwc") 0 0 no-repeat;
-    width:24px;
-    height:27px;
-    display:block;
-    text-indent:-9999px;
-    top:-7px;
-    right:-7px;
 }
