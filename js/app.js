@@ -5,6 +5,7 @@ $plane.name = "Player 1";
 $helicopter.name = "Player 2";
 planeScore = $("#planeScore").value;
 helicopterScore = $("#helicopterScore").value;
+var finishLine=false;
 
 $(document).on("ready", function() {
 
@@ -53,7 +54,7 @@ $(document).on("ready", function() {
   function movePlayer() {
       for (var direction in keys) {
           if (!keys.hasOwnProperty(direction)) continue;
-
+if(finishLine===false){
           // plane
           if (direction == 37) {
               $('#plane').animate({left: "-=5"}, 0, checkForFinishLine);
@@ -81,6 +82,7 @@ $(document).on("ready", function() {
           if (direction == 83) {
               $("#helicopter").animate({top: "+=5"}, 0, checkForFinishLine);
           }
+        }
       }
   }
 
@@ -117,8 +119,8 @@ function checkForFinishLine(){
   var verticalHelicopterMatch = comparePositions(finishPosition[1], helicopterPosition[1]);
   var planeMatch = horizontalPlaneMatch && verticalPlaneMatch;
   var helicopterMatch = horizontalHelicopterMatch && verticalHelicopterMatch;
-  if (planeMatch) { planeWon(); }
-  else if (helicopterMatch) { helicopterWon(); }
+  if (planeMatch) { planeWon(); finishLine=true;}
+  else if (helicopterMatch) { helicopterWon(); finishLine=true;}
 }
 
 function planeWon() {

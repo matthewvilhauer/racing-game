@@ -58,3 +58,8 @@
     border-radius:14px;
     padding:8px;
 }
+#instructions{
+  position:absolute;
+  left: 50%;
+  top: 2%;
+}
