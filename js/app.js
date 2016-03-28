@@ -107,7 +107,7 @@ function comparePositions(p1, p2) {
 
 //Checks to see if objects are touching one another
 function checkForFinishLine(){
-  var finish = $(".finish-line")[0];
+  var finish = $("#finish-line")[0];
   var finishPosition = getPositions(finish);
   var planePosition = getPositions($("#plane"));
   var helicopterPosition = getPositions($("#helicopter"));
